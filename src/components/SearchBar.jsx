@@ -10,7 +10,8 @@ function SearchBar() {
         city, setCity,
         setIsLoaded,
         setWeather,
-        setError
+        setError,
+        addPopularCities
     } = useContext(AppContext);
 
     const [cityInput, setCityInput] = useState(city);
@@ -25,12 +26,13 @@ function SearchBar() {
 
         setIsLoaded(false);
         setError(false);
+
         fetchWeatherData(cityInput, openWeatherApi.key, openWeatherApi.url)
             .then(data => {
 
-                // temperature, description, timestamp, iconId
                 setWeather(parseWeatherData(data));
                 setCity(cityInput);
+                addPopularCities(cityInput);
             })
             .catch(error => {
                 setError(error);

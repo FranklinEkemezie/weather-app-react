@@ -39,12 +39,17 @@ export const AppContextProvider = ( { children }) => {
         dispatch({type: 'SET_ERROR', payload: {error: errorMsg}});
     }
 
+    const addPopularCities = (...cities) => {
+        dispatch({type: 'ADD_POPULAR_CITIES', payload: { cities }});
+    }
+
     const appContextValue = {
         ...state,
         setCity,
         setIsLoaded,
         setWeather,
-        setError
+        setError,
+        addPopularCities
     };
 
 
