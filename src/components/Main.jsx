@@ -5,14 +5,12 @@ import AppContext from "../contexts/AppContext.jsx";
 
 function Main() {
 
-    const { isLoaded, weather } = useContext(AppContext);
+    const { isLoaded, weather, error } = useContext(AppContext);
 
     return (
         <div>
             <SearchBar />
-            {
-                isLoaded ? <WeatherBanner {...weather} /> : 'Loading...'
-            }
+            <WeatherBanner {...weather} loading={! isLoaded} error={error} />
         </div>
     );
 }

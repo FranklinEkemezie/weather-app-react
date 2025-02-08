@@ -14,6 +14,9 @@ const AppReducer = (state, action) => {
 
         case 'SET_WEATHER':
             return {...state, weather: payload.weather}
+
+        case 'SET_ERROR':
+            return {...state, error: payload.error}
     }
 }
 

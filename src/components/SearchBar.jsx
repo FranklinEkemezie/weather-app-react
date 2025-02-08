@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import searchBarStyles from "../assets/styles/search-bar.module.css";
 import AppContext from "../contexts/AppContext.jsx";
 import fetchWeatherData from "../functions/fetchWeatherData.js";
@@ -9,11 +9,11 @@ function SearchBar() {
     const {
         city, setCity,
         setIsLoaded,
-        setWeather
+        setWeather,
+        setError
     } = useContext(AppContext);
 
     const [cityInput, setCityInput] = useState(city);
-
 
     const openWeatherApi = {
         key: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
@@ -24,13 +24,18 @@ function SearchBar() {
         event.preventDefault();
 
         setIsLoaded(false);
-
+        setError(false);
         fetchWeatherData(cityInput, openWeatherApi.key, openWeatherApi.url)
             .then(data => {
 
                 // temperature, description, timestamp, iconId
                 setWeather(parseWeatherData(data));
                 setCity(cityInput);
+            })
+            .catch(error => {
+                setError(error);
+            })
+            .finally(() => {
                 setIsLoaded(true);
             })
         ;

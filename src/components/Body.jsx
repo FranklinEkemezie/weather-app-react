@@ -10,7 +10,8 @@ function Body( { children } ) {
     const {
         isLoaded, setIsLoaded,
         city, setCity,
-        weather, setWeather
+        weather, setWeather,
+        setError
     } = useContext(AppContext);
 
     const [bgImgUrl, setBgImg] = useState(defaultBgImg);
@@ -28,26 +29,24 @@ function Body( { children } ) {
 
     // Fetch and load weather data on first render
     useEffect(() => {
-
         const { key, url } = openWeatherApiDetails;
 
         setIsLoaded(false);
-
+        setError(false);
         fetchWeatherData(city, key, url)
             .then(data => {
-
-                const parsedWeatherData = parseWeatherData(data);
-
-                setWeather(parsedWeatherData);
+                setWeather(parseWeatherData(data));
                 setCity(city);
+            })
+            .catch(() => {
+                setError(true);
+            })
+            .finally(() => {
                 setIsLoaded(true);
-
-                return parsedWeatherData
             })
         ;
 
     }, []);
-
 
     // Load the Background Img from Unsplash once the image loads
     useEffect(() => {
@@ -68,6 +67,8 @@ function Body( { children } ) {
                 })
                 .then(data => {
                     setBgImg(data.urls.full);
+                })
+                .catch(error => {
                 })
             ;
         }

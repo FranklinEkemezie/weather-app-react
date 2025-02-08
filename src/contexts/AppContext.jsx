@@ -8,6 +8,7 @@ export const AppContextProvider = ( { children }) => {
     // App Initial state
     const popularCities = ['New York', 'Lagos', 'Accra', 'Senegal'];
     const appInitialState = {
+        popularCities: [...popularCities],
         city: popularCities[0],
         weather: {
             temperature: null,
@@ -15,7 +16,7 @@ export const AppContextProvider = ( { children }) => {
             iconId: null,
         },
         isLoaded: false,
-        popularCities: [...popularCities],
+        error: false
     }
 
     const [state, dispatch] = useReducer(AppReducer, appInitialState);
@@ -34,11 +35,16 @@ export const AppContextProvider = ( { children }) => {
         }}});
     }
 
+    const setError = (errorMsg) => {
+        dispatch({type: 'SET_ERROR', payload: {error: errorMsg}});
+    }
+
     const appContextValue = {
         ...state,
         setCity,
         setIsLoaded,
-        setWeather
+        setWeather,
+        setError
     };
 
 
