@@ -1,0 +1,53 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.6rem;
+    font-size: 1rem;
+}
+
+.header .brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.24rem;
+}
+
+.header .brand h1 {
+    font-size: inherit;
+    padding: 0;
+    margin: 0 0 0 .64rem;
+}
+
+.popularCitiesDropdownBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 48px;
+
+    border: 2px solid whitesmoke;
+    outline: none;
+    background-color: inherit;
+
+    color: white;
+    border-radius: .4rem;
+    padding: .8rem 1.2rem;
+
+    font: inherit;
+}
+.popularCitiesDropdownBtn:hover {
+    background-color: #b1b1b1;
+}
+
+.locationPinIcon {
+    margin-right: .4rem;
+}
+
+.locationPinIcon,
+.caretDownIcon {
+    height: 100%;
+    stroke: white;
+    filter: invert(100%);
+    object-fit: contain;
+}
+
