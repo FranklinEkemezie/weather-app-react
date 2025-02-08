@@ -5,12 +5,12 @@ A simple Weather app built with React.
 ## Features
 - Realtime and up-to-date weather information.
 - Minimalistic + intuitive UI designs.
-- Search functionality for popular cities
-- 
+- Search functionality for popular cities.
 
 
 ## Attributions
-- Design by: Shadezie 
+- Design inspired by Figma design: <Figma File URL goes here>
+    - Designer: Shadezie 
     - Email: (contactshadezie@gmail.com). 
     - Connect on social media handles `@shadezie` on Discord, Instagram, X, LinkedIn and Figma.
 
