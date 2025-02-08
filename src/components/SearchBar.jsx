@@ -1,36 +1,31 @@
-import {useContext, useEffect, useRef, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import searchBarStyles from "../assets/styles/search-bar.module.css";
 import AppContext from "../contexts/AppContext.jsx";
-import env from "../../env.js";
+import fetchWeatherData from "../functions/fetchWeatherData.js";
+import parseWeatherData from "../functions/parseWeatherData.js";
 
 function SearchBar() {
 
     const {
         city, setCity,
-        isLoaded, setIsLoaded,
-        weather, setWeather
+        setIsLoaded,
+        setWeather
     } = useContext(AppContext);
 
     const [cityInput, setCityInput] = useState(city);
 
-    const parseWeatherData = (data) => {
-        return {
-            temperature: data.main.temp,
-            description: data.weather[0].description,
-            timestamp: data.dt,
-            iconId: data.weather[0].icon
-        };
-    }
 
-    const apiKey = env.API.OPEN_WEATHER.KEY;
-
+    const openWeatherApi = {
+        key: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
+        url: import.meta.env.VITE_OPEN_WEATHER_API_BASE_URL
+    };
 
     const handleSearch = (event) => {
         event.preventDefault();
 
         setIsLoaded(false);
 
-        fetchWeatherData(cityInput, apiKey)
+        fetchWeatherData(cityInput, openWeatherApi.key, openWeatherApi.url)
             .then(data => {
 
                 // temperature, description, timestamp, iconId
@@ -41,37 +36,6 @@ function SearchBar() {
         ;
 
     }
-
-    const fetchWeatherData = async (city, apiKey) => {
-        const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-        return fetch(weatherApiUrl)
-            .then(response => {
-                if (! response.ok) {
-                    throw Error(`Status: ${response.status} ${response.statusText}`);
-                }
-
-                return response.json();
-            })
-        ;
-    }
-
-
-    useEffect(() => {
-
-        setIsLoaded(false);
-
-        fetchWeatherData(city, apiKey)
-            .then(data => {
-
-                setWeather(parseWeatherData(data));
-                setCity(city);
-                setIsLoaded(true);
-
-            })
-        ;
-
-    }, []);
 
     return (
         <div className={searchBarStyles.container}>
