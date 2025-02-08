@@ -9,7 +9,7 @@ import useString from "../hooks/useString.js";
 
 function Header() {
 
-    const { city, popularCities } = useContext(AppContext);
+    const { city, setCity, popularCities } = useContext(AppContext);
     const { sentenceCase } = useString();
 
     const dropdownBtnRef = React.createRef();
@@ -29,7 +29,11 @@ function Header() {
                     {sentenceCase(city)}
                     {/*<img className={headerStyles.caretDownIcon} src={caretDownIcon} alt=""/>*/}
                 </button>
-                <Dropdown dropdownList={popularCities} toggleBtnRefs={[dropdownBtnRef]}/>
+                <Dropdown
+                    dropdownList={popularCities}
+                    toggleBtnRefs={[dropdownBtnRef]}
+                    handleListItemClick={(city) => setCity(city)}
+                />
             </div>
         </div>
     );

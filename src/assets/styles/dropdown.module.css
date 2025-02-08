@@ -38,12 +38,12 @@
     list-style: none;
     margin-left: 0;
     padding-left: 0;
-
     min-width: 160px;
 }
 
 .dropdownItem {
     padding: .48rem .8rem;
+    cursor: pointer;
 }
 
 .dropdownLink {

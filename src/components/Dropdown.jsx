@@ -2,7 +2,7 @@ import dropdownStyles from "../assets/styles/dropdown.module.css";
 import {useEffect, useRef, useState} from "react";
 
 // eslint-disable-next-line react/prop-types
-function Dropdown( { dropdownList, toggleBtnRefs } ) {
+function Dropdown( { dropdownList, toggleBtnRefs, handleListItemClick } ) {
 
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -35,8 +35,12 @@ function Dropdown( { dropdownList, toggleBtnRefs } ) {
                             <ul className={dropdownStyles.dropdownList}>
                                 {
                                     dropdownList.map((item, index) => (
-                                        <li key={index} className={dropdownStyles.dropdownItem}>
-                                            <a href="" className={dropdownStyles.dropdownLink}>{item}</a>
+                                        <li
+                                            key={index}
+                                            className={dropdownStyles.dropdownItem}
+                                            onClick={() => handleListItemClick(item)}
+                                        >
+                                            <a className={dropdownStyles.dropdownLink}>{item}</a>
                                         </li>
                                     ))
                                 }

@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import searchBarStyles from "../assets/styles/search-bar.module.css";
 import AppContext from "../contexts/AppContext.jsx";
 import fetchWeatherData from "../functions/fetchWeatherData.js";
@@ -15,6 +15,11 @@ function SearchBar() {
     } = useContext(AppContext);
 
     const [cityInput, setCityInput] = useState(city);
+
+    // update the city on the search bar when a popular city is selected
+    useEffect(() => {
+        setCityInput(city);
+    }, [city]);
 
     const openWeatherApi = {
         key: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
